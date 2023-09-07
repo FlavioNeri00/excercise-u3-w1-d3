@@ -1,30 +1,44 @@
-import { Component } from "react"
-import { Card, Button, Container } from "react-bootstrap"
-import "../App.css"
+import React, { Component } from "react";
+import { Card, Container, Button } from "react-bootstrap";
+import CommentArea from "./CommentArea"; 
+
 class SingleBook extends Component {
+  state = {
+    selected: false,
+  };
 
-    state = {
-        selected : false
-    }
-   
-    render()
-    { return (
-        
+  toggleSelected = () => {
+    this.setState ({
+      selected: !this.state.selected,
+    });
+  };
+
+  render() {
+    return (
+      <div>
         <Container fluid="xl">
-        
-    <Card style={{ height: "700px" }}>
-    <Card.Img variant="top" src={this.props.img} />
-    <Card.Body  onClick={this.changeSelected}>
-      <Card.Title className="truncate">{this.props.title}</Card.Title>
-      <strong style={{display:"block"}}>{this.props.price}</strong>
-      <Button variant="primary" className="mt-3">Go somewhere</Button>
-    </Card.Body>
+          <Card
+           
+            style={{ borderColor: this.state.selected ? "red" : "grey" }}
+          >
+            <Card.Img variant="top" src={this.props.img}  onClick={this.toggleSelected}/>
+            <Card.Body>
+              <Card.Title className="truncate">{this.props.title}</Card.Title>
+              <strong style={{ display: "block" }}>{this.props.price}</strong>
+              <strong>{this.props.asin}</strong>
+              <Button variant="primary" className="mt-3" onClick={this.toggleSelected}>
+                Comments
+              </Button>
+              
+              {this.state.selected && (
+                <CommentArea asin={this.props.asin} />
+              )}
+            </Card.Body>
+          </Card>
+        </Container>
+      </div>
+    );
+  }
+}
 
-  </Card>
-  
-  </Container>)
-  
-}}
-    
-    
-export default SingleBook
+export default SingleBook;
