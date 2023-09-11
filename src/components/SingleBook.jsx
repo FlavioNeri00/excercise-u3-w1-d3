@@ -17,7 +17,7 @@ class SingleBook extends Component {
     return (
       <div>
         
-          <Card  onClick={this.toggleSelected}  style={{border: this.state.selected ? "solid" : "none" ,borderColor: this.state.selected ? "red" : "grey" }}>
+          <Card  onClick={this.toggleSelected}  style={{border: this.state.selected ? "2px solid red" : "none" }}>
             <Card.Img variant="top" src={this.props.img} />
             <Card.Body>
               <Card.Title className="truncate">{this.props.title}</Card.Title>
