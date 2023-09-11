@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import { Card, Container, Button } from "react-bootstrap";
-import CommentArea from "./CommentArea"; 
+import { Card, Button } from "react-bootstrap";
 
 class SingleBook extends Component {
   state = {
@@ -13,32 +12,31 @@ class SingleBook extends Component {
     });
   };
 
+  
   render() {
     return (
       <div>
-        <Container fluid="xl">
-          <Card
-           
-            style={{ borderColor: this.state.selected ? "red" : "grey" }}
-          >
-            <Card.Img variant="top" src={this.props.img}  onClick={this.toggleSelected}/>
+        
+          <Card  onClick={this.toggleSelected}  style={{border: this.state.selected ? "solid" : "none" ,borderColor: this.state.selected ? "red" : "grey" }}>
+            <Card.Img variant="top" src={this.props.img} />
             <Card.Body>
               <Card.Title className="truncate">{this.props.title}</Card.Title>
               <strong style={{ display: "block" }}>{this.props.price}</strong>
               <strong>{this.props.asin}</strong>
-              <Button variant="primary" className="mt-3" onClick={this.toggleSelected}>
-                Comments
+              <Button
+                variant="primary"
+                className="mt-3"
+                onClick={() => this.props.BookSelectionAsin(this.props.asin)}
+              >
+                Open Comments
               </Button>
-              
-              {this.state.selected && (
-                <CommentArea asin={this.props.asin} />
-              )}
             </Card.Body>
           </Card>
-        </Container>
+     
       </div>
     );
   }
 }
 
 export default SingleBook;
+

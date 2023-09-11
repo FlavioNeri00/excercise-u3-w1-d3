@@ -2,15 +2,13 @@ import React, { Component } from "react";
 import SingleBook from "./SingleBook";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 
-
 class BookList extends Component {
   state = {
     searchQuery: "",
-    selectedBookAsin: null,
   };
 
-  getQuery = (query, selectedBookAsin) => {
-    this.setState({ searchQuery: query, selectedBookAsin });
+  handleQueryChange = (event) => {
+    this.setState({ searchQuery: event.target.value });
   };
 
   render() {
@@ -23,32 +21,28 @@ class BookList extends Component {
               placeholder="Search"
               aria-describedby="inputGroup-sizing-default"
               value={this.state.searchQuery}
-              onChange={(event) =>
-                this.getQuery(event.target.value, this.state.selectedBookAsin)
-              }
+              onChange={this.handleQueryChange}
             />
             <Button type="submit">Search</Button>
           </Form.Group>
 
-          <Row className="gy-3">
-            {this.props.arr
+          <Row className="gy-5">
+            {/* {this.props.arr
               .filter((elem) =>
                 elem.title.toLowerCase().includes(this.state.searchQuery.toLowerCase())
-              )
-              .map((elem, index) => (
-                <Col xs={3} key={`id-${index}`}>
+              ) */}
+              {this.props.arr.map((elem) => (
+                <Col xs={3} key={`id-${elem.asin}`}>
                   <SingleBook
                     img={elem.img}
                     title={elem.title}
                     price={elem.price}
                     asin={elem.asin}
-                    // Passa l'asin del libro come prop
-                    onClick={() => this.getQuery(this.state.searchQuery, elem.asin)}
+                     BookSelectionAsin={this.props.BookSelectionAsin} 
                   />
                 </Col>
               ))}
           </Row>
-
         </Container>
       </div>
     );
