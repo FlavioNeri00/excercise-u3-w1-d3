@@ -1,32 +1,32 @@
-import React, { Component } from "react";
+
+import { useState } from "react";
 import { Card, Button } from "react-bootstrap";
 
-class SingleBook extends Component {
-  state = {
-    selected: false,
-  };
+const SingleBook = (props) => { 
+  
+const [selected, setSelected] = useState(false)
 
-  toggleSelected = () => {
-    this.setState ({
-      selected: !this.state.selected,
-    });
+
+ const toggleSelected = () => {
+   setSelected (!selected,
+    );
   };
 
   
-  render() {
+  
     return (
       <div>
         
-          <Card  onClick={this.toggleSelected}  style={{border: this.state.selected ? "2px solid red" : "none" }}>
-            <Card.Img variant="top" src={this.props.img} />
+          <Card  onClick={toggleSelected}  style={{border: selected ? "2px solid red" : "none" }}>
+            <Card.Img variant="top" src={props.img} />
             <Card.Body>
-              <Card.Title className="truncate">{this.props.title}</Card.Title>
-              <strong style={{ display: "block" }}>{this.props.price}</strong>
-              <strong>{this.props.asin}</strong>
+              <Card.Title className="truncate">{props.title}</Card.Title>
+              <strong style={{ display: "block" }}>{props.price}</strong>
+              <strong>{props.asin}</strong>
               <Button
                 variant="primary"
                 className="mt-3"
-                onClick={() => this.props.BookSelectionAsin(this.props.asin)}
+                onClick={() => props.BookSelectionAsin(props.asin)}
               >
                 Open Comments
               </Button>
@@ -36,7 +36,7 @@ class SingleBook extends Component {
       </div>
     );
   }
-}
+
 
 export default SingleBook;
 
